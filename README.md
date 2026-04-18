@@ -9,8 +9,8 @@ These test plans are designed to demonstrate specific capabilities and component
 
 *   **`scenario-logic-controllers.jmx`**
     *   A comprehensive demonstration of JMeter's **Logic Controllers** (If, While, Switch, ForEach, Random, Throughput, etc.). It uses `Dummy Samplers` and `JSON Extractors` to showcase how to dynamically control the test execution flow based on correlated variables.
-*   **`extractors_example.jmx`**
-    *   Contains examples of various **Post-Processors (Extractors)**. It demonstrates how to accurately extract dynamic values from responses using Regular Expressions, JSON Path, XPath, CSS Selectors, etc.
+*   **`JMeter Correlation Advanced 30.jmx`**
+    *   Contains 30 advanced correlation exercises and examples of various **Post-Processors (Extractors)**. It demonstrates how to accurately extract dynamic values from responses using Regular Expressions, JSON Path, XPath, CSS Selectors, etc.
 *   **`threadgroup_http_example.jmx`**
     *   Showcases different configurations of **Thread Groups** (e.g., Standard Thread Group, Concurrency Thread Group, Stepping Thread Group) and foundational HTTP Request samplers to simulate diverse load generation patterns.
 
