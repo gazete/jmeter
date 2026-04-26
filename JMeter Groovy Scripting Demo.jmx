@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="JMeter Groovy Scripting Demo">
+      <stringProp name="TestPlan.comments">JSR223 &amp; Groovy 실전 데모</stringProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG1: File I/O Demo">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - File Write">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.io.File
+import java.io.FileWriter
+import java.io.BufferedWriter
+
+// 파일 경로 설정
+String filePath = &quot;token_data.csv&quot;
+File myFile = new File(filePath)
+
+// 파일 쓰기 로직 (append 모드)
+FileWriter fw = new FileWriter(myFile, true)
+BufferedWriter bw = new BufferedWriter(fw)
+
+try {
+    String dummyToken = &quot;TOKEN_&quot; + UUID.randomUUID().toString()
+    bw.write(dummyToken)
+    bw.newLine()
+    log.info(&quot;토큰 저장 완료: &quot; + dummyToken)
+} catch (Exception e) {
+    log.error(&quot;파일 쓰기 중 에러 발생: &quot; + e.getMessage())
+} finally {
+    bw.close()
+    fw.close()
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG2: Date &amp; Epoch Demo" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Date Format">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.Instant
+
+// 1. 표준 날짜 형식 (yyyy-MM-dd HH:mm)
+String formattedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;))
+vars.put(&quot;current_date&quot;, formattedDate)
+log.info(&quot;포맷팅된 날짜: &quot; + formattedDate)
+
+// 2. Unix Epoch Time (13자리 밀리초 변환)
+long epochTime = Instant.now().toEpochMilli()
+vars.put(&quot;epoch_timestamp&quot;, epochTime.toString())
+log.info(&quot;Epoch 타임스탬프: &quot; + epochTime)</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG3: Custom Function Demo" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Define Function">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">// 클로저(Closure) 함수 정의
+def add = { a, b -&gt; a + b }
+
+// 객체 형태로 메모리에 저장
+vars.putObject(&quot;myAddFunc&quot;, add)
+log.info(&quot;myAddFunc 함수가 객체로 저장되었습니다.&quot;)</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Execute Function">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">// 저장된 함수 객체 불러오기
+def func = vars.getObject(&quot;myAddFunc&quot;)
+
+if (func != null) {
+    // 함수 실행 및 재사용
+    int result = func(100, 200)
+    log.info(&quot;함수 실행 결과: &quot; + result)
+    SampleResult.setResponseMessage(&quot;성공적으로 연산됨: &quot; + result)
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG4: SLA Control Demo" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Dummy HTTP Request">
+          <stringProp name="HTTPSampler.domain">example.com</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor - SLA Check">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">// 방금 실행된 샘플러의 결과 데이터에 접근 (PostProcessor 전용)
+long resTime = prev.getTime()
+
+log.info(&quot;현재 샘플러 응답 시간: &quot; + resTime + &quot;ms&quot;)
+
+// SLA 200ms 초과 시 복잡한 조건부 실패 로직 구현
+// 데모를 위해 무조건 300ms가 걸렸다고 가정하는 테스트 로직 주입 가능하지만 prev.getTime()을 사용
+if (resTime &gt;= 0) { // 데모용 조건 (항상 실패 처리되도록 시뮬레이션 하려면 resTime &gt;= 0으로 테스트)
+    if(resTime &lt; 200) { log.info(&quot;응답이 너무 빨라 강제 에러 시뮬레이션 적용&quot;); resTime = 250; }
+    
+    if(resTime &gt; 200) {
+        prev.setSuccessful(false)
+        prev.setResponseCode(&quot;500&quot;)
+        prev.setResponseMessage(&quot;SLA 초과에 의한 강제 실패 처리&quot;)
+        log.error(&quot;SLA 200ms 초과! 실제 응답 시간: &quot; + resTime + &quot;ms&quot;)
+    }
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG5: Selenium WebDriver Demo" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - Mock WebDriver">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">// 이 스크립트는 Selenium WebDriver 플러그인이 설치된 환경의 WebDriver Sampler에서 동작합니다.
+// 기본 JSR223 Sampler에서는 WDS 객체가 없으므로 에러가 발생할 수 있어 주석 처리 후 구조만 보여드립니다.
+
+/*
+// 브라우저 페이지 이동
+WDS.browser.get(&quot;https://example.com/store&quot;)
+
+// CSV 등에서 주입받은 category 변수를 가져옴
+String categoryName = vars.get(&quot;category&quot;) ?: &quot;default_category&quot;
+
+// WDS.browser 객체를 이용해 CSS 셀렉터로 요소를 찾고 동적 클릭 이벤트 발생
+WDS.browser.findElement(pkg.By.cssSelector(&quot;a[href*=&apos;&quot; + categoryName + &quot;&apos;]&quot;)).click()
+
+log.info(&quot;카테고리 클릭 완료: &quot; + categoryName)
+*/
+
+log.info(&quot;WebDriver 데모 스크립트 실행 완료 (JSR223 임시 실행)&quot;);</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

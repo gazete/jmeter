@@ -5,6 +5,8 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Lv.1] Q01_Access_Token" enabled="false">
@@ -32,7 +34,7 @@
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - accessToken">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - accessToken" enabled="true">
             <stringProp name="JSONPostProcessor.referenceNames">accessToken</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.accessToken</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
@@ -58,7 +60,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Nested Response">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Nested Response" enabled="true">
           <stringProp name="RESPONSE_DATA">{&quot;data&quot;: {&quot;token&quot;: &quot;nested_tok_123&quot;}}</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
           <boolProp name="WAITING">false</boolProp>
@@ -72,21 +74,21 @@
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - data.token">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - data.token" enabled="true">
             <stringProp name="JSONPostProcessor.referenceNames">nestedToken</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.data.token</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Lv.1] Q03_CSRF_Token">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="[Lv.1] Q03_CSRF_Token" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -97,7 +99,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - HTML Page">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - HTML Page" enabled="true">
           <stringProp name="RESPONSE_DATA">&lt;input type=&quot;hidden&quot; name=&quot;csrfToken&quot; value=&quot;abc_csrf_999&quot;/&gt;</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
           <boolProp name="WAITING">false</boolProp>
@@ -111,7 +113,7 @@
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex - csrfToken">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex - csrfToken" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">csrfToken</stringProp>
             <stringProp name="RegexExtractor.regex">name=&quot;csrfToken&quot; value=&quot;(.+?)&quot;</stringProp>
@@ -122,7 +124,7 @@
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
@@ -496,7 +498,7 @@ Content-Type: text/plain</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Multiple Products" enabled="true">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Multiple Products">
           <stringProp name="RESPONSE_DATA">{&quot;products&quot;: [{&quot;id&quot;:&quot;P1&quot;}, {&quot;id&quot;:&quot;P2&quot;}, {&quot;id&quot;:&quot;P3&quot;}]}</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
           <boolProp name="WAITING">false</boolProp>
@@ -510,7 +512,7 @@ Content-Type: text/plain</stringProp>
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - All Product IDs (-1)" enabled="true">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON - All Product IDs (-1)">
             <stringProp name="JSONPostProcessor.referenceNames">productId</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.products[*].id</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">-1</stringProp>
@@ -529,7 +531,7 @@ Content-Type: text/plain</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Send Timestamp ${__time()}" enabled="true">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Send Timestamp ${__time()}">
           <stringProp name="REQUEST_DATA">{&quot;requestTime&quot;: &quot;${__time()}&quot;}</stringProp>
           <stringProp name="RESPONSE_DATA">Generated Time: ${__time()}</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
@@ -555,7 +557,7 @@ Content-Type: text/plain</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Send UUID ${__UUID()}" enabled="true">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Send UUID ${__UUID()}">
           <stringProp name="REQUEST_DATA">X-Request-ID: ${__UUID()}</stringProp>
           <stringProp name="RESPONSE_DATA">Generated UUID: ${__UUID()}</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
@@ -581,7 +583,7 @@ Content-Type: text/plain</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Auth Header" enabled="true">
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="Dummy - Auth Header">
           <stringProp name="RESPONSE_DATA">HTTP/1.1 200 OK&#xd;
 Authorization-Token: Bearer auth_jwt_999</stringProp>
           <boolProp name="SUCCESFULL">true</boolProp>
@@ -596,7 +598,7 @@ Authorization-Token: Bearer auth_jwt_999</stringProp>
           <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
         </kg.apc.jmeter.samplers.DummySampler>
         <hashTree>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex - Authorization-Token" enabled="true">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex - Authorization-Token">
             <stringProp name="RegexExtractor.refname">authToken</stringProp>
             <stringProp name="RegexExtractor.regex">Authorization-Token:\s*(.+?)\r?\n</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
@@ -1118,7 +1120,7 @@ vars.put(&quot;selectedItem&quot;, list[randIndex]);
         </DebugSampler>
         <hashTree/>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
