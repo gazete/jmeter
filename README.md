@@ -7,12 +7,18 @@ This repository contains various Apache JMeter test plans (`.jmx`) and related d
 ### 1. Feature Demonstrations
 These test plans are designed to demonstrate specific capabilities and components within JMeter:
 
-*   **`scenario-logic-controllers.jmx`**
-    *   A comprehensive demonstration of JMeter's **Logic Controllers** (If, While, Switch, ForEach, Random, Throughput, etc.). It uses `Dummy Samplers` and `JSON Extractors` to showcase how to dynamically control the test execution flow based on correlated variables.
 *   **`JMeter Correlation Advanced 30.jmx`**
-    *   Contains 30 advanced correlation exercises and examples of various **Post-Processors (Extractors)**. It demonstrates how to accurately extract dynamic values from responses using Regular Expressions, JSON Path, XPath, CSS Selectors, etc.
-*   **`threadgroup_http_example.jmx`**
-    *   Showcases different configurations of **Thread Groups** (e.g., Standard Thread Group, Concurrency Thread Group, Stepping Thread Group) and foundational HTTP Request samplers to simulate diverse load generation patterns.
+    *   Contains 30 advanced correlation exercises and examples of various **Post-Processors (Extractors)**. Demonstrates accurate extraction of dynamic values using Regular Expressions, JSON Path, XPath, CSS Selectors, etc.
+*   **`JMeter_Correlation_Examples.jmx`**
+    *   Provides foundational examples of correlation techniques to extract and utilize dynamic response data in subsequent requests.
+*   **`JMeter Groovy Scripting Demo.jmx`**
+    *   Demonstrates the use of **JSR223 Samplers/PreProcessors/PostProcessors** with Groovy scripting for custom logic, data manipulation, and advanced test scenarios.
+*   **`JMeter-logic-controllers.jmx`** & **`JMeter_Logic_Controller_sample.jmx`**
+    *   Comprehensive demonstrations of JMeter's **Logic Controllers** (If, While, Switch, ForEach, Random, Throughput, etc.). Showcases how to dynamically control the test execution flow based on variables.
+*   **`JMeter-module.jmx`**
+    *   Illustrates the use of the **Module Controller** and **Test Fragments** to create modular, reusable test components, improving maintainability of complex test plans.
+*   **`JMeter_Thread_Group.jmx`** & **`threadgroup_http_example.jmx`**
+    *   Showcases different configurations of **Thread Groups** (e.g., Standard Thread Group, Concurrency Thread Group, Stepping Thread Group) and HTTP Request samplers to simulate diverse load generation patterns.
 
 ### 2. Petstore Application Scenarios
 These test plans simulate realistic user behaviors against a sample Petstore web application:
@@ -24,7 +30,7 @@ These test plans simulate realistic user behaviors against a sample Petstore web
 
 ### 3. Test Data
 *   **`user_info.csv`**
-    *   A CSV dataset containing user credentials and information (e.g., username, password). It is typically used in conjunction with the `CSV Data Set Config` element in the Petstore test plans to inject parameter variables into requests.
+    *   A CSV dataset containing user credentials and information (e.g., username, password). It is typically used in conjunction with the `CSV Data Set Config` element in the test plans to inject parameter variables into requests.
 
 ## 🚀 How to Use
 
@@ -43,12 +49,18 @@ These test plans simulate realistic user behaviors against a sample Petstore web
 ### 1. 기능 데모
 이 테스트 플랜들은 JMeter 내의 특정 기능 및 컴포넌트를 시연하기 위해 설계되었습니다:
 
-*   **`scenario-logic-controllers.jmx`**
-    *   JMeter의 **논리 컨트롤러(Logic Controllers)** (If, While, Switch, ForEach, Random, Throughput 등)에 대한 종합적인 데모입니다. `Dummy Samplers`와 `JSON Extractors`를 사용하여 추출된 변수를 기반으로 테스트 실행 흐름을 동적으로 제어하는 방법을 보여줍니다.
 *   **`JMeter Correlation Advanced 30.jmx`**
-    *   30가지의 고급 상관관계 연습과 다양한 **후처리기(Post-Processors/Extractors)** 예제를 포함하고 있습니다. 정규식(Regular Expressions), JSON Path, XPath, CSS Selectors 등을 사용하여 응답에서 동적 값을 정확하게 추출하는 방법을 시연합니다.
-*   **`threadgroup_http_example.jmx`**
-    *   다양한 **스레드 그룹(Thread Groups)** 구성(예: Standard Thread Group, Concurrency Thread Group, Stepping Thread Group)과 기본적인 HTTP Request 샘플러를 통해 다양한 부하 생성 패턴을 시뮬레이션하는 방법을 보여줍니다.
+    *   30가지의 고급 상관관계(Correlation) 연습과 다양한 **후처리기(Post-Processors/Extractors)** 예제를 포함합니다. 정규식, JSON Path, XPath, CSS Selectors 등을 사용하여 응답에서 동적 값을 정확하게 추출하는 방법을 시연합니다.
+*   **`JMeter_Correlation_Examples.jmx`**
+    *   동적 응답 데이터를 추출하고 이후의 요청에 활용하는 기본적인 상관관계 기법의 예제를 제공합니다.
+*   **`JMeter Groovy Scripting Demo.jmx`**
+    *   **JSR223 샘플러/전처리기/후처리기**와 Groovy 스크립팅을 활용하여 사용자 정의 로직, 데이터 조작 및 고급 테스트 시나리오를 구현하는 방법을 보여줍니다.
+*   **`JMeter-logic-controllers.jmx`** 및 **`JMeter_Logic_Controller_sample.jmx`**
+    *   JMeter의 **논리 컨트롤러(Logic Controllers)**(If, While, Switch, ForEach, Random, Throughput 등)에 대한 종합적인 데모입니다. 변수를 기반으로 테스트 실행 흐름을 동적으로 제어하는 방법을 보여줍니다.
+*   **`JMeter-module.jmx`**
+    *   **모듈 컨트롤러(Module Controller)**와 **테스트 프래그먼트(Test Fragments)**를 사용하여 모듈화되고 재사용 가능한 테스트 컴포넌트를 생성함으로써 복잡한 테스트 플랜의 유지보수성을 향상시키는 방법을 설명합니다.
+*   **`JMeter_Thread_Group.jmx`** 및 **`threadgroup_http_example.jmx`**
+    *   다양한 **스레드 그룹(Thread Groups)** 구성(예: Standard, Concurrency, Stepping)과 HTTP Request 샘플러를 통해 다양한 부하 생성 패턴을 시뮬레이션하는 방법을 보여줍니다.
 
 ### 2. Petstore 애플리케이션 시나리오
 이 테스트 플랜들은 샘플 Petstore 웹 애플리케이션을 대상으로 실제 사용자의 행동을 시뮬레이션합니다:
@@ -60,7 +72,7 @@ These test plans simulate realistic user behaviors against a sample Petstore web
 
 ### 3. 테스트 데이터
 *   **`user_info.csv`**
-    *   사용자 자격 증명 및 정보(예: 사용자 이름, 비밀번호)가 포함된 CSV 데이터셋입니다. 주로 Petstore 테스트 플랜의 `CSV Data Set Config` 요소와 함께 사용되어 요청에 파라미터 변수를 주입하는 데 사용됩니다.
+    *   사용자 자격 증명 및 정보(예: 사용자 이름, 비밀번호)가 포함된 CSV 데이터셋입니다. 주로 테스트 플랜의 `CSV Data Set Config` 요소와 함께 사용되어 요청에 파라미터 변수를 주입하는 데 사용됩니다.
 
 ## 🚀 사용 방법
 
